@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+    <Properties>
+        <Property name="baseDir">logs</Property>
+    </Properties>
+    <Appenders>
+        <Console name="StdOut" target="SYSTEM_OUT">
+            <PatternLayout
+                    pattern="%d{${LOG_DATEFORMAT_PATTERN:-yyyy-MM-dd HH:mm:ss.SSS}} %highlight{${LOG_LEVEL_PATTERN:-%5p}}{FATAL=red blink, ERROR=red, WARN=yellow bold, INFO=green, DEBUG=green bold, TRACE=blue} %style{${sys:PID}}{magenta} [%15.15t] : %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}"/>
+            <ThresholdFilter level="TRACE" onMatch="ACCEPT" onMismatch="DENY"/>
+        </Console>
+        <RollingFile name="RollingFile" fileName="${baseDir}/app.log"
+                     filePattern="${baseDir}/$${date:yyyy-MM-dd}/app-%d{yyyy-MM-dd-HH}.log.gz">
+            <ThresholdFilter level="INFO" onMatch="ACCEPT" onMismatch="DENY"/>
+            <PatternLayout
+                    pattern="%d{${LOG_DATEFORMAT_PATTERN:-yyyy-MM-dd HH:mm:ss.SSS}} ${LOG_LEVEL_PATTERN:-%5p} ${sys:PID} [%15.15t] : %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}"/>
+            <Policies>
+                <CronTriggeringPolicy schedule="0 0 */1 * * ?" evaluateOnStartup="true"/>
+                <SizeBasedTriggeringPolicy size="20 MB"/>
+            </Policies>
+            <DefaultRolloverStrategy>
+                <Delete basePath="${baseDir}" maxDepth="2">
+                    <IfFileName glob="*/app-*.log.gz"/>
+                    <IfLastModified age="1d"/>
+                </Delete>
+            </DefaultRolloverStrategy>
+        </RollingFile>
+    </Appenders>
+    <Loggers>
+        <!-- General Logging Control -->
+        <asyncRoot level="INFO">
+            <AppenderRef ref="StdOut"/>
+            <AppenderRef ref="RollingFile"/>
+        </asyncRoot>
+
+        <!-- Logging Control of Spring -->
+        <Logger name="org.springframework" level="ERROR"/>
+        <!-- Logging Control of Quartz -->
+        <Logger name="org.quartz" level="INFO"/>
+
+        <!-- Logging Control of Druid -->
+        <Logger name="druid.sql.Connection" level="ERROR"/>
+        <Logger name="druid.sql.Statement" level="ERROR"/>
+        <Logger name="druid.sql.ResultSet" level="ERROR"/>
+
+        <!-- Logging Control of Hibernate -->
+        <Logger name="org.hibernate.validator" level="ERROR"/>
+
+        <!-- Logging Control of MyBatis -->
+        <Logger name="org.mybatis" level="ERROR"/>
+        <Logger name="org.apache.ibatis" level="ERROR"/>
+
+        <!-- Logging Control of MongoDB -->
+        <Logger name="org.mongodb.driver" level="ERROR"/>
+        <Logger name="org.mongodb.morphia" level="ERROR"/>
+
+        <!-- Logging Control of Redisson -->
+        <Logger name="org.redisson" level="INFO"/>
+        <Logger name="io.netty" level="ERROR"/>
+
+        <!-- Logging Control of Other Tools -->
+        <Logger name="org.apache.commons" level="ERROR"/>
+        <Logger name="httpclient.wire.content" level="ERROR"/>
+        <Logger name="org.apache.commons.httpclient" level="ERROR"/>
+    </Loggers>
+</Configuration>

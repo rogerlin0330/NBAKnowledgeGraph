@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+    <classPathEntry
+            location="/Users/rogerlin/IdeaProjects/USCKnowledgeGraph/lib/mysql-connector-java-5.1.48-bin.jar"/>
+    <context id="MySQL" targetRuntime="MyBatis3">
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://ec2-54-67-29-193.us-west-1.compute.amazonaws.com:3306/inf558"
+                        userId="inf558"
+                        password="inf558">
+        </jdbcConnection>
+        <javaModelGenerator targetPackage="edu.usc.viterbi.dsci.dsci558project.domain"
+                            targetProject="/Users/rogerlin/IdeaProjects/USCKnowledgeGraph/src/main/java">
+            <property name="enableSubPackages" value="true"/>
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+        <javaClientGenerator targetPackage="edu.usc.viterbi.dsci.dsci558project.dao"
+                             targetProject="/Users/rogerlin/IdeaProjects/USCKnowledgeGraph/src/main/java"
+                             type="ANNOTATEDMAPPER">
+            <property name="enableSubPackages" value="true"/>
+        </javaClientGenerator>
+
+        <table schema="inf558" tableName="PLAYER_BASIC" domainObjectName="PlayerBasic">
+            <columnOverride column="player_id" property="playerId" javaType="java.lang.String"/>
+            <columnOverride column="player_url" property="playerUrl" javaType="java.lang.String"/>
+            <columnOverride column="player_name" property="playerName" javaType="java.lang.String"/>
+            <columnOverride column="player_full_name" property="playerFullName" javaType="java.lang.String"/>
+            <columnOverride column="date_of_birth" property="dateOfBirth" javaType="java.util.Date"/>
+            <columnOverride column="place_of_birth" property="placeOfBirth" javaType="java.lang.String"/>
+            <columnOverride column="height" property="height" javaType="java.lang.Double"/>
+            <columnOverride column="weight" property="weight" javaType="java.lang.Double"/>
+            <columnOverride column="dominant_hand" property="dominantHand" javaType="java.lang.String"/>
+            <columnOverride column="college" property="college" javaType="java.lang.String"/>
+            <columnOverride column="high_school" property="highSchool" javaType="java.lang.String"/>
+        </table>
+
+        <table schema="inf558" tableName="PLAYER_PERFORMANCE_STAT_PER_GAME" domainObjectName="PlayerPerfStatPerGame">
+            <columnOverride column="player_id" property="playerId" javaType="java.lang.String"/>
+            <columnOverride column="season" property="season" javaType="java.lang.String"/>
+            <columnOverride column="age" property="age" javaType="java.lang.Integer"/>
+            <columnOverride column="team_abbrv_name" property="teamAbbrvName" javaType="java.lang.String"/>
+            <columnOverride column="league" property="league" javaType="java.lang.String"/>
+            <columnOverride column="position" property="position" javaType="java.lang.String"/>
+            <columnOverride column="G" property="G" javaType="java.lang.Integer"/>
+            <columnOverride column="GS" property="GS" javaType="java.lang.Integer"/>
+            <columnOverride column="MP" property="MP" javaType="java.lang.Double"/>
+            <columnOverride column="FG" property="FG" javaType="java.lang.Double"/>
+            <columnOverride column="FGA" property="FGA" javaType="java.lang.Double"/>
+            <columnOverride column="FGP" property="FGP" javaType="java.lang.Double"/>
+            <columnOverride column="3P" property="_3P" javaType="java.lang.Double"/>
+            <columnOverride column="3PA" property="_3PA" javaType="java.lang.Double"/>
+            <columnOverride column="3PP" property="_3PP" javaType="java.lang.Double"/>
+            <columnOverride column="2P" property="_2P" javaType="java.lang.Double"/>
+            <columnOverride column="2PA" property="_2PA" javaType="java.lang.Double"/>
+            <columnOverride column="2PP" property="_2PP" javaType="java.lang.Double"/>
+            <columnOverride column="eFGP" property="eFGP" javaType="java.lang.Double"/>
+            <columnOverride column="FT" property="FT" javaType="java.lang.Double"/>
+            <columnOverride column="FTA" property="FTA" javaType="java.lang.Double"/>
+            <columnOverride column="FTP" property="FTP" javaType="java.lang.Double"/>
+            <columnOverride column="ORB" property="ORB" javaType="java.lang.Double"/>
+            <columnOverride column="DRB" property="DRB" javaType="java.lang.Double"/>
+            <columnOverride column="TRB" property="TRB" javaType="java.lang.Double"/>
+            <columnOverride column="AST" property="AST" javaType="java.lang.Double"/>
+            <columnOverride column="STL" property="STL" javaType="java.lang.Double"/>
+            <columnOverride column="BLK" property="BLK" javaType="java.lang.Double"/>
+            <columnOverride column="TOV" property="TOV" javaType="java.lang.Double"/>
+            <columnOverride column="PF" property="PF" javaType="java.lang.Double"/>
+            <columnOverride column="PTS" property="PTS" javaType="java.lang.Double"/>
+        </table>
+    </context>
+</generatorConfiguration>
